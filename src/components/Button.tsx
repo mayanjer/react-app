@@ -1,12 +1,14 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface Props {
     children: ReactNode;
+    onClick: () => void;
+    color?: "primary" | "secondary";
     
  }
 
 
-function Button({children}: Props) {
-    return <button className = "btn btn-primary">{children}</button>
+function Button({children, onClick, color="primary"}: Props) {
+    return <button className = {'btn btn-'+color} onClick = {onClick}>{children}</button>
 }
 export default Button
