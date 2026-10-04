@@ -6,22 +6,17 @@ import ListGroup from "./components/ListGroup";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
 import HeartBtn from "./components/Heart";
+import ExpandableText from "./components/ExpandableText";
+import { LayoutFreeform } from "lucide-react";
 
 function App() {
-  const [game, setGame] = useState({
-    id: 1,
-    player: {
-      name:"John"
-    }
-  });
+  
+    
+  
 
   return (
     <div>
-      <h1>{game.player.name}</h1>
-      <Button onClick={() => {
-        setGame({...game, player:{...game.player, name:"Mayanja"}})
-      }}>Hello</Button>
-      
+     
     </div>
   );
 }
