@@ -3,17 +3,21 @@ import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import ListGroup from './components/ListGroup'
+import Alert from './components/Alert'
+import Button from './components/Button'
 
 
 
 function App() {
-  const handleSelect = function(item:String){
-    console.log(item)
-  }
-
-  const items = [ "Kampala","Kenya", "Momabasa" ,"Kigali" ]
- 
-  return <div><ListGroup items={items} heading="Cities" onSelectItem={ handleSelect} /></div>
+  
+  return (
+    <div>
+      <Alert>
+        Hello world
+      </Alert>{" "}
+      <Button>Enter</Button>
+    </div>
+  ); 
 }
 
-export default App
+export default App 
