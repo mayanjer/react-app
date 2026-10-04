@@ -7,10 +7,13 @@ import ListGroup from './components/ListGroup'
 
 
 function App() {
+  const handleSelect = function(item:String){
+    console.log(item)
+  }
 
   const items = [ "Kampala","Kenya", "Momabasa" ,"Kigali" ]
  
-  return <div><ListGroup items = {items}  heading = "Cities" /></div>
+  return <div><ListGroup items={items} heading="Cities" onSelectItem={ handleSelect} /></div>
 }
 
 export default App
