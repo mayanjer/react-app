@@ -1,19 +1,26 @@
+import type { ChangeEvent } from "react";
+
 function Table() {
-    const objects = [
-      { description: "Milk", amount: "$5", category: "Groceries" },
-      { description: "Eggs", amount: "$10", category: "Groceries" },
-      { description: "Electricity", amount: "$100", category: "Utilities" },
-      { description: "Movies", amount: "$15", category: "Entertainment" },
-      { description: "Milk", amount: "$5", category: "Groceries" },
-    ];
+  const items = [
+    { description: "Milk", amount: "$5", category: "Groceries" },
+    { description: "Eggs", amount: "$10", category: "Groceries" },
+    { description: "Electricity", amount: "$100", category: "Utilities" },
+    { description: "Movies", amount: "$15", category: "Entertainment" },
+    { description: "Milk", amount: "$5", category: "Groceries" },
+  ];
+    
+    function changeHandler(event : ChangeEvent<HTMLSelectElement>) {
+        console.log(event.target)
+    }
   return (
     <>
-      <select className = "form-control mt-5">
-        <option value="">All Categories</option>
-        <option value="">Groceries</option>
-        <option value="">Utility</option>
-        <option value="">Entertainment</option>
+      <select className="form-control mt-5" onChange = {changeHandler}>
+        <option id = "all" value="categories">All Categories</option>
+        <option id = "groceries" value="groceries">Groceries</option>
+        <option id = "utilities" value="utilities">Utility</option>
+        <option id = "entertainment" value="entertainment">Entertainment</option>
       </select>
+
       <table className="table mt-2">
         <thead>
           <tr>
@@ -24,13 +31,16 @@ function Table() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          
+          {items.map((item, index) => {
+            return (
+              <tr>
+                <th scope="row">{index + 1}</th>
+                <td>{item.description}</td>
+                <td>{item.amount}</td>
+                <td>{item.category}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </>
