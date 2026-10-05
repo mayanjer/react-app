@@ -1,66 +1,74 @@
 import { useForm, type FieldValues } from "react-hook-form";
 
 function TrackerForm() {
-    
-    const { register, formState : {errors}, handleSubmit } = useForm()
-    console.log(errors)
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  console.log(errors);
 
-    function onSubmit(data:FieldValues) {
-        console.log(data)
-    }
+  function onSubmit(data: FieldValues) {
+    console.log(data);
+  }
 
-    return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-3">
-          <label htmlFor="description" className="form-label">
-            Description
-          </label>
-          <input
-            id="description"
-            {...register("description", { required: true, minLength: 3 })}
-            type="text"
-            className="form-control"
-          ></input>
-        </div>
-        {errors.description?.type === "required" && (
-          <p className="text-danger">Description is required</p>
-        )}
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="mb-3">
+        <label htmlFor="description" className="form-label">
+          Description
+        </label>
+        <input
+          id="description"
+          {...register("description", { required: true, minLength: 3 })}
+          type="text"
+          className="form-control"
+        ></input>
+      </div>
+      {errors.description?.type === "required" && (
+        <p className="text-danger">Description is required</p>
+      )}
 
-        {errors.description?.type === "minLength" && (
-          <p className="text-danger">Minimum length is 3</p>
-        )}
+      {errors.description?.type === "minLength" && (
+        <p className="text-danger">Minimum length is 3 characters</p>
+      )}
 
-        <div className="mb-3">
-          <label htmlFor="amount" className="form-label">
-            Amount
-          </label>
-          <input
-            id="amount"
-            {...register("amount", { required: true })}
-            type="number"
-            className="form-control"
-          ></input>
-        </div>
-        {errors.amount?.type === "required" && (
-          <p className="text-danger">Amount is required</p>
-        )}
+      <div className="mb-3">
+        <label htmlFor="amount" className="form-label">
+          Amount
+        </label>
+        <input
+          id="amount"
+          {...register("amount", { required: true })}
+          type="number"
+          className="form-control"
+        ></input>
+      </div>
+      {errors.amount?.type === "required" && (
+        <p className="text-danger">Amount is required</p>
+      )}
 
-        <div className="mb-3">
-          <label htmlFor="category" className="form-label">
-            Category
-          </label>
-                <input id="category" {...register('category', {required:true})} type="text" className="form-control"></input>
-            </div>
-            
-        {errors.category?.type === "required" && (
-          <p className="text-danger">Category is required</p>
-        )}
+      <div className="mb-3">
+        <label htmlFor="category" className="form-label">
+          Category
+        </label>
+        <input
+          id="category"
+          {...register("category", { required: true })}
+          type="text"
+          className="form-control"
+        ></input>
+      </div>
 
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
-    );
+      {errors.category?.type === "required" && (
+        <p className="text-danger">Category is required</p>
+      )}
+
+      <button type="submit" className="btn btn-primary">
+        Submit
+      </button>
+    </form>
+  );
 }
 
-export default TrackerForm
+export default TrackerForm;
