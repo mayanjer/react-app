@@ -7,14 +7,16 @@ import Alert from "./components/Alert";
 import Button from "./components/Button";
 import HeartBtn from "./components/Heart";
 import ExpandableText from "./components/ExpandableText";
-import { LayoutFreeform } from "lucide-react";
+import { LayoutFreeform} from "lucide-react";
 import Form from './components/Form'
 import TrackerForm from "./components/TrackerForm";
+import Table from "./components/Table";
 
 function App() {
 
   return <>
-  <TrackerForm/>
+    <TrackerForm />
+    <Table/>
   </>
 }
   

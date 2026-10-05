@@ -52,17 +52,19 @@ function TrackerForm() {
         <label htmlFor="category" className="form-label">
           Category
         </label>
-        <input
+    
+        <select
           id="category"
-          {...register("category", { required: true })}
-          type="text"
           className="form-control"
-        ></input>
+        >
+          <option value=""></option>
+          <option value="">Groceries</option>
+          <option value="">Utilities</option>
+          <option value="">Entertainment</option>
+        </select>
       </div>
 
-      {errors.category?.type === "required" && (
-        <p className="text-danger">Category is required</p>
-      )}
+     
 
       <button type="submit" className="btn btn-primary">
         Submit
