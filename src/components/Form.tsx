@@ -10,7 +10,8 @@ function Form() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+      formState: { errors, isValid },
+    
   } = useForm<FormData>();
 
   function onSubmit(data: FieldValues) {
@@ -45,7 +46,7 @@ function Form() {
         ></input>
           </div>
           {errors.age?.type === "required" && <p>The age is required</p>}
-      <button type="submit" className="btn btn-primary">
+      <button disabled = {!isValid} type="submit" className="btn btn-primary">
         Submit
       </button>
     </form>
