@@ -9,11 +9,12 @@ import HeartBtn from "./components/Heart";
 import ExpandableText from "./components/ExpandableText";
 import { LayoutFreeform } from "lucide-react";
 import Form from './components/Form'
+import TrackerForm from "./components/TrackerForm";
 
 function App() {
 
   return <>
-  <Form/>
+  <TrackerForm/>
   </>
 }
   
