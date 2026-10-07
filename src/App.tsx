@@ -34,34 +34,45 @@ function App() {
     return () => controller.abort();
   }, []);
 
-  const deleteUser = (user: User) => {
+  const deleteUser = async (user: User) => {
     const originalList = [...users];
     setUsers(users.filter((usr) => usr.id !== user.id));
 
-    const performDelete = async () => {
-      try {
-        await axios.delete(
-          "https://jsonplaceholder.typicode.com/users/" + user.id,
-        );
-      } catch (error) {
-        setError((error as AxiosError).message);
-        setUsers(originalList);
-      }
-    };
-    performDelete();
+    try {
+      await axios.delete(
+        "https://jsonplaceholder.typicode.com/users/" + user.id,
+      );
+    } catch (error) {
+      setError((error as AxiosError).message);
+      setUsers(originalList);
+    }
   };
 
   const addUser = async () => {
     try {
-      const { data } = await axios.post(
-        "https://jsonplaceholder.typicode.com/users",
-        user,
-      );
+      await axios.post("https://jsonplaceholder.typicode.com/users", user);
       setUsers([user, ...users]);
     } catch (error) {
       setError((error as AxiosError).message);
     }
   };
+
+  const updateUser = async (user: User) => {
+    const originalList = [...users]
+    const updatedUser = { ...user, name: user.name + "!" }
+    setUsers(users.map((usr) => usr.id === user.id ? updatedUser : usr))
+    
+    try {
+      await axios.patch(
+        "https://jsonplaceholder.typicode.com/users/" + user.id,
+        updatedUser,
+      );
+    } catch (error) {
+      setError((error as AxiosError).message)
+      setUsers(originalList)
+    }
+    
+  }
 
   return (
     <>
@@ -77,12 +88,15 @@ function App() {
             key={user.id}
           >
             {user.name}
-            <button
-              className="btn btn-outline-danger"
-              onClick={() => deleteUser(user)}
-            >
-              Delete
-            </button>
+            <div>
+              <button className="btn btn-outline-secondary mx-1" onClick = {()=>updateUser(user)}>Update</button>
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => deleteUser(user)}
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>
