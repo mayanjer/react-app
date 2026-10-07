@@ -14,18 +14,7 @@ import Table from "./components/Table";
 import ProductList from "./components/ProductList";
 
 function App() {
-  const ref = useRef<HTMLInputElement>(null);
   
-
-  useEffect(() => {
-    if (ref) {
-      document.title = "My App"
-      ref.current?.focus();
-    }
-  })
-
-  
-
   return (
     <>
       <ProductList/>

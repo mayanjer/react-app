@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 
 function ProductList() {
 
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState<string[]>([])
 
     useEffect(() => {
         console.log("Loading products")
-    })
-  return <div></div>;
+        setProducts(["product_1", "product_2"])
+    }, [])
+    return <div>
+      Product List
+  </div>;
 }
 
 export default ProductList;
