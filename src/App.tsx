@@ -12,31 +12,47 @@ import Form from "./components/Form";
 import TrackerForm from "./components/TrackerForm";
 import Table from "./components/Table";
 import ProductList from "./components/ProductList";
-import axios from "axios";
+import axios, { AxiosError, CanceledError } from "axios";
 
 interface User {
   id: number;
   name: string;
 }
 
-
+interface Error {
+  message: string;
+}
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
+    const controller = new AbortController()
     const fetchData = async () => {
-      const res = await axios.get("https://jsonplaceholder.typicode.com/users");
-      console.log(await res.data)
-      setUsers(res.data)
-    }
-    fetchData()
-    
+
+      setLoading(true)
+      try {
+        const res = await axios.get<User[]>(
+          "https://jsonplaceholder.typicode.com/users", {signal: controller.signal}
+        );
+        console.log(res.data);
+        setUsers(res.data);
+        setLoading(false)
+      } catch (error) {
+        if (error instanceof (CanceledError)) return
+        setError((error as AxiosError).message);
+        setLoading(false)
+      }
+    };
+    fetchData();
+    return ()=> controller.abort()
   }, []);
 
   return (
     <>
+      {isLoading && <div className = "spinner-border"></div>}
       {error && <p className="text-danger">{error}</p>}
       <ul>
         {users.map((user) => (
