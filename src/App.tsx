@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios, { AxiosError, CanceledError } from "axios";
+import apiClient, {AxiosError, CanceledError} from "./services/api-client";
 
 interface User {
   id: number;
@@ -17,8 +17,8 @@ function App() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get<User[]>(
-          "https://jsonplaceholder.typicode.com/users",
+        const res = await apiClient.get<User[]>(
+          "/users",
           { signal: controller.signal },
         );
         console.log(res.data);
@@ -39,8 +39,8 @@ function App() {
     setUsers(users.filter((usr) => usr.id !== user.id));
 
     try {
-      await axios.delete(
-        "https://jsonplaceholder.typicode.com/users/" + user.id,
+      await apiClient.delete(
+        "/users/" + user.id,
       );
     } catch (error) {
       setError((error as AxiosError).message);
@@ -50,7 +50,7 @@ function App() {
 
   const addUser = async () => {
     try {
-      await axios.post("https://jsonplaceholder.typicode.com/users", user);
+      await apiClient.post("/users", user);
       setUsers([user, ...users]);
     } catch (error) {
       setError((error as AxiosError).message);
@@ -63,8 +63,8 @@ function App() {
     setUsers(users.map((usr) => usr.id === user.id ? updatedUser : usr))
     
     try {
-      await axios.patch(
-        "https://jsonplaceholder.typicode.com/users/" + user.id,
+      await apiClient.patch(
+        "/users/" + user.id,
         updatedUser,
       );
     } catch (error) {
