@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import heroImg from "./assets/hero.png";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
@@ -7,18 +7,31 @@ import Alert from "./components/Alert";
 import Button from "./components/Button";
 import HeartBtn from "./components/Heart";
 import ExpandableText from "./components/ExpandableText";
-import { LayoutFreeform} from "lucide-react";
-import Form from './components/Form'
+import { LayoutFreeform } from "lucide-react";
+import Form from "./components/Form";
 import TrackerForm from "./components/TrackerForm";
 import Table from "./components/Table";
+import ProductList from "./components/ProductList";
 
 function App() {
-
-  return <>
-    <TrackerForm />
-    <Table/>
-  </>
-}
+  const ref = useRef<HTMLInputElement>(null);
   
+
+  useEffect(() => {
+    if (ref) {
+      document.title = "My App"
+      ref.current?.focus();
+    }
+  })
+
+  
+
+  return (
+    <>
+      <ProductList/>
+    </>
+  );
+}
+
 
 export default App;

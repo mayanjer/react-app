@@ -2,8 +2,8 @@ import { useState, type ChangeEvent } from "react";
 
 interface Item {
   description: string;
-  amount: string
-  category : string
+  amount: string;
+  category: string;
 }
 
 function Table() {
@@ -16,14 +16,13 @@ function Table() {
   ];
 
   const [items, setItems] = useState(objs);
-  
 
   function changeHandler(event: ChangeEvent<HTMLSelectElement>) {
     const newItems: Item[] = [];
     objs.map((obj) => {
       if (obj.category === event.target.value) {
-        newItems.push(obj)
-        setItems(newItems)
+        newItems.push(obj);
+        setItems(newItems);
       }
     });
   }
@@ -61,6 +60,9 @@ function Table() {
                 <td key={index}>{item.description}</td>
                 <td key={index}>{item.amount}</td>
                 <td key={index}>{item.category}</td>
+                <td key={index}>
+                  <button className="btn btn-outline btn-danger">Delete</button>
+                </td>
               </tr>
             );
           })}
