@@ -21,7 +21,6 @@ function App() {
           "/users",
           { signal: controller.signal },
         );
-        console.log(res.data);
         setUsers(res.data);
         setLoading(false);
       } catch (error) {
