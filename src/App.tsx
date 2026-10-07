@@ -1,17 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import heroImg from "./assets/hero.png";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
-import ListGroup from "./components/ListGroup";
-import Alert from "./components/Alert";
-import Button from "./components/Button";
-import HeartBtn from "./components/Heart";
-import ExpandableText from "./components/ExpandableText";
-import { LayoutFreeform } from "lucide-react";
-import Form from "./components/Form";
-import TrackerForm from "./components/TrackerForm";
-import Table from "./components/Table";
-import ProductList from "./components/ProductList";
+import { useEffect, useState } from "react";
 import axios, { AxiosError, CanceledError } from "axios";
 
 interface User {
@@ -19,9 +6,6 @@ interface User {
   name: string;
 }
 
-interface Error {
-  message: string;
-}
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -54,9 +38,11 @@ function App() {
     <>
       {isLoading && <div className = "spinner-border"></div>}
       {error && <p className="text-danger">{error}</p>}
-      <ul>
+      <ul className = "list-group">
         {users.map((user) => (
-          <li key={user.id}>{user.name}</li>
+          <li className = "list-group-item d-flex justify-content-between"  key={user.id}>{user.name}
+          <button className = "btn btn-outline-danger">Delete</button>
+          </li>
         ))}
       </ul>
     </>
