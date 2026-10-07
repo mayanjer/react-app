@@ -16,25 +16,28 @@ import axios from "axios";
 
 interface User {
   id: number;
-  name : string
+  name: string;
 }
 
 function App() {
-  const [users, setUsers] = useState<User[]>([])
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    axios.get<User[]>("https://jsonplaceholder.typicode.com/users").then((res)=> setUsers(res.data));
-  }, [])
- 
+    axios
+      .get<User[]>("https://jsonplaceholder.typicode.com/users")
+      .then((res) => setUsers(res.data))
+      .catch((error)=>console.log(error));
+  }, []);
+
   return (
     <>
       <ul>
-        {users.map((user) => <li key={user.id}>{ user.name }</li>)}
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
       </ul>
-      
     </>
   );
 }
-
 
 export default App;
