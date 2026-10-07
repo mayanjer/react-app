@@ -13,19 +13,18 @@ import TrackerForm from "./components/TrackerForm";
 import Table from "./components/Table";
 import ProductList from "./components/ProductList";
 
+const connect = () => console.log("connecting...");
+const disconnect = () => console.log("disconnecting...");
+
 function App() {
-  const [category, setCategory] = useState('')
+  useEffect(() => {
+    connect()
+    return ()=> disconnect()
+  })
   
   return (
     <>
-      <div>
-        <select onChange={(event) => { setCategory(event.target.value)}}>
-          <option value=""></option>
-          <option value="clothing">clothing</option>
-          <option value="household">household</option>
-        </select>
-      </div>
-      <ProductList category={ category } />
+      
     </>
   );
 }
