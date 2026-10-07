@@ -14,10 +14,18 @@ import Table from "./components/Table";
 import ProductList from "./components/ProductList";
 
 function App() {
+  const [category, setCategory] = useState('')
   
   return (
     <>
-      <ProductList/>
+      <div>
+        <select onChange={(event) => { setCategory(event.target.value)}}>
+          <option value=""></option>
+          <option value="clothing">clothing</option>
+          <option value="household">household</option>
+        </select>
+      </div>
+      <ProductList category={ category } />
     </>
   );
 }
